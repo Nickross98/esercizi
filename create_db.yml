@@ -1,0 +1,19 @@
+---
+- name: create database
+  hosts: ubuntu
+  become: yes
+  become_user: root
+  vars:
+    - ansible_ssh_user: ubuntu
+  tasks:
+    - name: copy commands from local to remote
+      copy:
+        src: create.sql
+        dest: /home/ubuntu/sql/create.sql
+
+    - name: table creation
+      mysql_db:
+
+        name: people
+        state: import
+        target: /home/ubuntu/sql/create.sql

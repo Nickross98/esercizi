@@ -1,0 +1,13 @@
+---
+- name: mysql setup
+  hosts: ubuntu
+  become: yes
+  become_user: root
+  vars:
+    - ansible_ssh_user: ubuntu
+  tasks:
+    - name: install
+      apt: name=mysql-server update_cache=yes
+    
+    - name: start
+      raw: service mysql start 
