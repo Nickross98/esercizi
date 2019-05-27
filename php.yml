@@ -1,0 +1,14 @@
+---
+- name: create_web_page
+  hosts: ubuntu
+  become: yes
+  become_user: root
+  vars:
+    - ansible_ssh_user: ubuntu
+  tasks:
+    - name: restarting nginx
+      service: name=nginx state=restarted
+    - name: copying php file from bastion to webserver
+      copy:
+        src: hello.php 
+        dest: /var/www/html/hello.php

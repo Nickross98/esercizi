@@ -1,0 +1,10 @@
+---
+- name: install_git
+  hosts: ubuntu
+  become: yes
+  become_user: root
+  vars:
+    - ansible_ssh_user: ubuntu
+  tasks:
+    - name: install_git
+      raw: apt update && apt install git -y 

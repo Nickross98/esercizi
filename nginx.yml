@@ -1,0 +1,11 @@
+---
+- name: install nginx
+  hosts: ubuntu
+  vars:
+    - become: yes
+      become_user: root
+      ansible_ssh_user: ubuntu
+  tasks:
+    - apt:
+        - name: nginx
+          update: yes
