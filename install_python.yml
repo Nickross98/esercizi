@@ -1,0 +1,11 @@
+---
+- name: install python3
+  hosts: postgres
+  become: yes
+  become_user: root
+  gather_facts: false
+  vars:
+    - ansible_ssh_user: ubuntu
+  tasks:
+    - name: installing python3...
+      raw: apt update && apt install python3 -y

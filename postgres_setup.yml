@@ -1,0 +1,26 @@
+---
+- name: postgres setup
+  hosts: postgres
+  become: yes
+  become_user: root
+  gather_facts: false
+  vars:
+    - ansible_ssh_user: ubuntu
+  
+  tasks:
+  
+    - name: updating the repo cache...
+      raw: apt update
+  
+    - name: installing wget and ca-certificates...
+      raw: apt install wget ca-certificates -y
+  
+    - name: adding repo key...
+      raw: wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+  
+    - name: adding repo to ubuntu...
+      raw: sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+  
+    - name: installing postgreSQL...
+      raw: apt install postgresql postgresql-contrib -y
+
